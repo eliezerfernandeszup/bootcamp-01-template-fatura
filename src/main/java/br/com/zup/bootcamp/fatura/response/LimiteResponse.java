@@ -6,11 +6,11 @@ public class LimiteResponse {
 
     private BigDecimal limite;
 
-    public LimiteResponse(BigDecimal limite) {
-        this.limite = limite;
-    }
-
     public BigDecimal getLimite() {
         return limite;
+    }
+
+    public void setLimite(BigDecimal limite) {
+        this.limite = limite;
     }
 }

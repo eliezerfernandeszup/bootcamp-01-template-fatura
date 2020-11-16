@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -55,13 +56,17 @@ public class Fatura {
     }
 
     public FaturaResponse toResponse() {
-        return new FaturaResponse(this.mes, this.ano, Transacao.toResponseSet(transacoes), CalcularTotalFatura());
+        return new FaturaResponse(this.mes, this.ano, Transacao.toResponseSet(transacoes), calcularTotalFatura());
     }
 
-    private BigDecimal CalcularTotalFatura() {
+    private BigDecimal calcularTotalFatura() {
         Assert.notNull(transacoes, "As transações não podem ser nulas.");
         return transacoes.stream()
                 .map(Transacao::getValor)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public BigDecimal calcularSaldoDoCartao(BigDecimal limite) {
+        return limite.subtract(calcularTotalFatura()).setScale(2, RoundingMode.CEILING);
     }
 }
