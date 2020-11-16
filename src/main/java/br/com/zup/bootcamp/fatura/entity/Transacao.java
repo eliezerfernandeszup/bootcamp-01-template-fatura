@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
@@ -64,4 +65,13 @@ public class Transacao {
     public LocalDateTime getEfetivadaEm() {
         return efetivadaEm;
     }
+
+    public Integer getMesTransacaoEfetivada() {
+        return efetivadaEm.getMonth().getValue();
+    }
+
+    public Integer getAnoTransacaoEfetivada() {
+        return efetivadaEm.getYear();
+    }
+
 }
