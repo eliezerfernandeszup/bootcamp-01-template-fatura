@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: transacao
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST:localhost:9092}
+    consumer:
+      auto-offset-reset: ${KAFKA_AUTO-OFFSET-RESET:latest}
+      group-id: ${KAFKA_CONSUMER_GROUP_ID:minha-aplicacao}
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    topic:
+      transactions: transacoes
