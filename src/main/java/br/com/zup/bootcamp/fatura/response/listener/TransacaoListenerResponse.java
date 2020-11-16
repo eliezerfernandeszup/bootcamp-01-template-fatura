@@ -1,5 +1,9 @@
 package br.com.zup.bootcamp.fatura.response.listener;
 
+import br.com.zup.bootcamp.fatura.entity.Cartao;
+import br.com.zup.bootcamp.fatura.entity.Transacao;
+import br.com.zup.bootcamp.fatura.repository.CartaoRepository;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -44,13 +48,13 @@ public class TransacaoListenerResponse {
         return efetivadaEm;
     }
 
-    @Override
-    public String toString() {
-        return "TransacaoListenerResponse{" +
-                "valor=" + valor +
-                ", estabelecimento=" + estabelecimento +
-                ", cartao=" + cartao +
-                ", efetivadaEm='" + efetivadaEm + '\'' +
-                '}';
+    public Transacao toModel(CartaoRepository cartaoRepository) {
+        Cartao cartao = this.cartao.toModel();
+
+        if (cartaoRepository.findById(cartao.getId()).isEmpty()){
+            cartaoRepository.save(cartao);
+        }
+
+        return new Transacao(id, valor, cartao, estabelecimento.toModel(), efetivadaEm);
     }
 }

@@ -1,5 +1,7 @@
 package br.com.zup.bootcamp.fatura.response.listener;
 
+import br.com.zup.bootcamp.fatura.entity.Estabelecimento;
+
 public class EstabelecimentoListenerResponse {
 
     private String nome;
@@ -28,12 +30,7 @@ public class EstabelecimentoListenerResponse {
         return endereco;
     }
 
-    @Override
-    public String toString() {
-        return "EstabelecimentoResponse{" +
-                "nome='" + nome + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", endereco='" + endereco + '\'' +
-                '}';
+    public Estabelecimento toModel() {
+        return new Estabelecimento(nome, cidade, endereco);
     }
 }

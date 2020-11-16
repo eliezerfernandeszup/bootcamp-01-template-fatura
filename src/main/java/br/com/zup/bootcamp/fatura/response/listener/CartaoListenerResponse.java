@@ -1,7 +1,10 @@
 package br.com.zup.bootcamp.fatura.response.listener;
 
+import br.com.zup.bootcamp.fatura.entity.Cartao;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 public class CartaoListenerResponse {
 
@@ -28,11 +31,7 @@ public class CartaoListenerResponse {
         return email;
     }
 
-    @Override
-    public String toString() {
-        return "CartaoListenerResponse{" +
-                "id='" + id + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public Cartao toModel() {
+        return new Cartao(id, email);
     }
 }
