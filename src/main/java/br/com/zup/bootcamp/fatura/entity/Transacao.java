@@ -1,13 +1,16 @@
 package br.com.zup.bootcamp.fatura.entity;
 
+import br.com.zup.bootcamp.fatura.response.TransacaoResponse;
+import org.springframework.util.Assert;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 public class Transacao {
@@ -43,6 +46,15 @@ public class Transacao {
         this.cartao = cartao;
         this.estabelecimento = estabelecimento;
         this.efetivadaEm = converterParaLocalDate(efetivadaEm);
+    }
+
+    public static Set<TransacaoResponse> toResponseSet(Set<Transacao> transacoes) {
+        Assert.notNull(transacoes , "A transaçao não pode ser nula");
+        return transacoes.stream().map(Transacao::toResponse).collect(Collectors.toSet());
+    }
+
+    public TransacaoResponse toResponse(){
+        return new TransacaoResponse(this.valor, this.estabelecimento.toResponse(), this.efetivadaEm);
     }
 
     private LocalDateTime converterParaLocalDate(String efetivadaEm) {

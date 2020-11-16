@@ -1,5 +1,7 @@
 package br.com.zup.bootcamp.fatura.entity;
 
+import br.com.zup.bootcamp.fatura.response.EstabelecimentoResponse;
+
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 
@@ -35,5 +37,9 @@ public class Estabelecimento {
 
     public String getEndereco() {
         return endereco;
+    }
+
+    public EstabelecimentoResponse toResponse() {
+        return new EstabelecimentoResponse(this.nome, this.cidade, this.endereco);
     }
 }

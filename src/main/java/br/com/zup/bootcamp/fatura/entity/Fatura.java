@@ -1,10 +1,12 @@
 package br.com.zup.bootcamp.fatura.entity;
 
+import br.com.zup.bootcamp.fatura.response.FaturaResponse;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -50,5 +52,16 @@ public class Fatura {
     public void setTransacoes(Transacao transacao) {
         Assert.notNull(transacao, "A transação não pode ser nula");
         this.transacoes.add(transacao);
+    }
+
+    public FaturaResponse toResponse() {
+        return new FaturaResponse(this.mes, this.ano, Transacao.toResponseSet(transacoes), CalcularTotalFatura());
+    }
+
+    private BigDecimal CalcularTotalFatura() {
+        Assert.notNull(transacoes, "As transações não podem ser nulas.");
+        return transacoes.stream()
+                .map(Transacao::getValor)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
