@@ -31,3 +31,15 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
     topic:
       transactions: transacoes
+
+#Urls de servicos externos
+servicos-externos:
+  cartoes: http://localhost:8888
+
+#timeouts do Feign
+feign:
+  client:
+    config:
+      analise-proposta:
+        connect-timeout: 1000
+        read-timeout: 1000
