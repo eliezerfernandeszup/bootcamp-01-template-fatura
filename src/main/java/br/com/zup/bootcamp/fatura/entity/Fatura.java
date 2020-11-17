@@ -38,6 +38,10 @@ public class Fatura {
     public Fatura(){
     }
 
+    public Cartao getCartao() {
+        return cartao;
+    }
+
     public Fatura(@Positive @NotNull Integer mes, @Positive @NotNull Integer ano, Set<Transacao> transacoes) {
         this.mes = mes;
         this.ano = ano;
