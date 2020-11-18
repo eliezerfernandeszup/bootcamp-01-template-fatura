@@ -17,6 +17,6 @@ public interface CartaoClient {
     LimiteResponse buscarLimiteDoCartao (@PathVariable String id);
 
     @PostMapping("/api/cartoes/{id}/parcelas")
-    ResponseEntity<ParcelamentoFaturaResponseClient> parcelarFatura (@PathVariable String id,
-                                                                     @RequestBody ParcelamentoFaturaRequestClient request);
+    ParcelamentoFaturaResponseClient parcelarFatura (@PathVariable String id,
+                                                     @RequestBody ParcelamentoFaturaRequestClient request);
 }
