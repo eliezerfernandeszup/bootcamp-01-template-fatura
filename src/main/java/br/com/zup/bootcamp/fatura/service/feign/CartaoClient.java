@@ -2,6 +2,7 @@ package br.com.zup.bootcamp.fatura.service.feign;
 
 import br.com.zup.bootcamp.fatura.request.ParcelamentoFaturaRequestClient;
 import br.com.zup.bootcamp.fatura.request.RenegociarFaturaRequestClient;
+import br.com.zup.bootcamp.fatura.request.VencimentoFaturaRequest;
 import br.com.zup.bootcamp.fatura.response.LimiteResponse;
 import br.com.zup.bootcamp.fatura.response.ParcelamentoFaturaResponseClient;
 import br.com.zup.bootcamp.fatura.response.RenegociacaoFaturaResponseClient;
@@ -28,6 +29,7 @@ public interface CartaoClient {
                                                       @RequestBody RenegociarFaturaRequestClient request);
 
     @PostMapping("/api/cartoes/{id}/vencimentos")
-    ResponseEntity<VencimentoFaturaResponseClient> alterarVencimentoDaFatura (@PathVariable String id);
+    ResponseEntity<VencimentoFaturaResponseClient> alterarVencimentoDaFatura (@PathVariable String id,
+                                                                              @RequestBody VencimentoFaturaRequest request);
 
 }
