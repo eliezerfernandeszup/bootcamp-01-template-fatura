@@ -1,6 +1,5 @@
 package br.com.zup.bootcamp.fatura.service;
 
-import br.com.zup.bootcamp.fatura.entity.Cartao;
 import br.com.zup.bootcamp.fatura.entity.Fatura;
 import br.com.zup.bootcamp.fatura.repository.FaturaRepository;
 import br.com.zup.bootcamp.fatura.response.LimiteResponse;

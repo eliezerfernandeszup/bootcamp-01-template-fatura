@@ -38,6 +38,10 @@ public class Fatura {
     public Fatura(){
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public Cartao getCartao() {
         return cartao;
     }
