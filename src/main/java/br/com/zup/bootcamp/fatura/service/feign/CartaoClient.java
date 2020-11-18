@@ -4,6 +4,7 @@ import br.com.zup.bootcamp.fatura.request.ParcelamentoFaturaRequestClient;
 import br.com.zup.bootcamp.fatura.response.LimiteResponse;
 import br.com.zup.bootcamp.fatura.response.ParcelamentoFaturaResponseClient;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,5 +17,6 @@ public interface CartaoClient {
     LimiteResponse buscarLimiteDoCartao (@PathVariable String id);
 
     @PostMapping("/api/cartoes/{id}/parcelas")
-    ParcelamentoFaturaResponseClient parcelarFatura (@PathVariable String id, @RequestBody ParcelamentoFaturaRequestClient request);
+    ResponseEntity<ParcelamentoFaturaResponseClient> parcelarFatura (@PathVariable String id,
+                                                                     @RequestBody ParcelamentoFaturaRequestClient request);
 }
