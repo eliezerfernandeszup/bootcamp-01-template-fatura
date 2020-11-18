@@ -1,13 +1,14 @@
 package br.com.zup.bootcamp.fatura.request;
 
-import br.com.zup.bootcamp.fatura.entity.ParcelamentoFatura;
+import br.com.zup.bootcamp.fatura.entity.Renegociacao;
+import org.springframework.util.Assert;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class ParcelamentoFaturaRequestClient {
+public class RenegociarFaturaRequestClient {
 
     @NotNull
     private UUID identificadorDaFatura;
@@ -20,10 +21,12 @@ public class ParcelamentoFaturaRequestClient {
     @Positive
     private BigDecimal valor;
 
-    public ParcelamentoFaturaRequestClient(ParcelamentoFatura parcelamentoFatura) {
-        this.identificadorDaFatura = parcelamentoFatura.getFatura().getId();
-        this.quantidade = parcelamentoFatura.getParcelas();
-        this.valor = parcelamentoFatura.getValorDaParcela();
+
+    public RenegociarFaturaRequestClient(Renegociacao renegociacao) {
+        Assert.notNull(renegociacao, "A renegociação não pode ser nula.");
+        this.identificadorDaFatura = renegociacao.getFatura().getId();
+        this.quantidade = renegociacao.getParcelas();
+        this.valor = renegociacao.getValorDaParcela();
     }
 
     public UUID getIdentificadorDaFatura() {
@@ -49,5 +52,4 @@ public class ParcelamentoFaturaRequestClient {
     public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
-
 }
