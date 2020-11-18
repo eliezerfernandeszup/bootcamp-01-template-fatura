@@ -40,12 +40,13 @@ public class ParcelarFaturaService {
         try {
             var statusParcelamento = cartaoClient.parcelarFatura(fatura.getCartao().getId(), parcelamentoFaturaRequestClient);
             parcelamentoFatura.setStatusParcelamento(statusParcelamento.getResultado());
+            parcelarFaturaRepository.save(parcelamentoFatura);
 
             logger.info("[Parcelamento da fatura]: notificando sistema legado do parcelamento - status {}", statusParcelamento.getResultado());
         }catch (FeignException exception) {
             logger.warn("[Parcelamento da fatura ]: erro: {}", exception.contentUTF8());
         }
 
-        return parcelarFaturaRepository.save(parcelamentoFatura);
+        return parcelamentoFatura;
     }
 }
