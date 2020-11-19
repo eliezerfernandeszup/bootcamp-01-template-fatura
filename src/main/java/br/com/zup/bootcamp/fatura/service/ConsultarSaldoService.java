@@ -27,7 +27,7 @@ public class ConsultarSaldoService {
     }
 
     public SaldoResponse processarValorDoSaldo(String cartaoId){
-        logger.info("[Consultado Limite do Cartão] " );
+        logger.info("[Consultado Limite do Cartão] : Consultado no legado o limite para o cartão " );
 
         try {
             limiteResponse = cartaoClient.buscarLimiteDoCartao(cartaoId);
