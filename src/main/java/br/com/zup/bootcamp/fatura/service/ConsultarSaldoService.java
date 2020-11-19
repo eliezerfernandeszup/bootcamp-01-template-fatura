@@ -1,5 +1,6 @@
 package br.com.zup.bootcamp.fatura.service;
 
+import br.com.zup.bootcamp.fatura.entity.Cartao;
 import br.com.zup.bootcamp.fatura.entity.Fatura;
 import br.com.zup.bootcamp.fatura.repository.FaturaRepository;
 import br.com.zup.bootcamp.fatura.response.LimiteResponse;
@@ -26,18 +27,18 @@ public class ConsultarSaldoService {
         this.faturaRepository = faturaRepository;
     }
 
-    public SaldoResponse processarValorDoSaldo(String cartaoId){
+    public SaldoResponse processarValorDoSaldo(Cartao cartao){
         logger.info("[Consultado Limite do Cartão] : Consultado no legado o limite para o cartão " );
 
         try {
-            limiteResponse = cartaoClient.buscarLimiteDoCartao(cartaoId);
+            limiteResponse = cartaoClient.buscarLimiteDoCartao(cartao.getId());
         }catch (FeignException exception){
             logger.warn("[FeignException] : Não foi possível consultar o límite do cartão");
         }
 
         LocalDate dataAtual = LocalDate.now();
 
-        List<Fatura> faturas = faturaRepository.findByCartaoIdAndMesAndAno(cartaoId,
+        List<Fatura> faturas = faturaRepository.findByCartaoIdAndMesAndAno(cartao.getId(),
                 dataAtual.getMonthValue(),
                 dataAtual.getYear());
 

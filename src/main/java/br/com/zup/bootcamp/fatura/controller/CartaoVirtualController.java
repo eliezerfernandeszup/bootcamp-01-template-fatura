@@ -46,7 +46,7 @@ public class CartaoVirtualController {
 
         Cartao cartao = cartaoBuscado.get();
 
-        if(!cartaoVirtualService.verificarSeLimiteDoCartaoEstaDisponivel(cartao.getId(), cartaoVirtualRequest.getLimite())) {
+        if(!cartaoVirtualService.verificarSeLimiteDoCartaoEstaDisponivel(cartao, cartaoVirtualRequest.getLimite())) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(
                     new ErroPadronizado(Collections.singleton("O Limite não estão disponível para o valor socilitado!"))
             );

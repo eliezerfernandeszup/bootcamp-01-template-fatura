@@ -39,7 +39,7 @@ public class ConsultarSaldoController {
 
         Cartao cartao = cartaoBuscado.get();
 
-        var saldoResponse = consultarSaldoService.processarValorDoSaldo(cartao.getId());
+        var saldoResponse = consultarSaldoService.processarValorDoSaldo(cartao);
 
         return ResponseEntity.ok(saldoResponse);
     }
